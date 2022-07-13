@@ -76,6 +76,7 @@ jobs:
           name: Build front-end
           command: |
             cd frontend
+            sudo npm install -g install-peerdeps
             sudo npm install
             sudo npm run build
       - save_cache:
@@ -93,6 +94,7 @@ jobs:
           name: Back-end build
           command: |
             cd backend
+            sudo npm install -g install-peerdeps
             sudo npm install
             sudo npm run build
       - save_cache:
