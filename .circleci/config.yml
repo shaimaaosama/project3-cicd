@@ -80,8 +80,8 @@ jobs:
           name: Build front-end
           command: |
             cd frontend
-            sudo npm install
-            sudo npm run build
+            npm install
+            npm run build
       - save_cache:
           paths: [frontend/node_modules]
           key: frontend-deps
@@ -97,8 +97,8 @@ jobs:
           name: Back-end build
           command: |
             cd backend
-            sudo npm install
-            sudo npm run build
+            npm install
+            npm run build
       - save_cache:
           paths: [backend/node_modules]
           key: backend-deps
@@ -201,24 +201,28 @@ jobs:
       
       - destroy-environment
 
-  # configure-infrastructure:
-  #   docker:
-  #     # Docker image here that supports Ansible
-  #   steps:
-  #     # Checkout code from git
-  #     # Add ssh keys with fingerprint
-  #     # attach workspace
-  #     - run:
-  #         name: Install dependencies
-  #         command: |
-  #           # Your code here
-  #           exit 1
-  #     - run:
-  #         name: Configure server
-  #         command: |
-  #           # Your code here
-  #           exit 1
-  #     # Here's where you will add some code to rollback on failure      
+  configure-infrastructure:
+    docker:
+      # Docker image here that supports Ansible
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      # Add ssh keys with fingerprint
+      - add_ssh_keys:
+          fingerprints:
+            - "8c:28:c2:6b:45:52:2c:0f:99:e7:14:56:30:5a:14:43"
+      # attach workspace
+      - run:
+          name: Install dependencies
+          command: |
+            # Your code here
+            exit 1
+      - run:
+          name: Configure server
+          command: |
+            # Your code here
+            exit 1
+      # Here's where you will add some code to rollback on failure      
 
 #   run-migrations:
 #     docker:
