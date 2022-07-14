@@ -1,13 +1,13 @@
 
 - name: "Install nodejs 13"
-    become:
-      shell: |
-        curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
-        sudo apt-get install -y nodejs
-        sudo npm install --global n
-        sudo n 13.8.0
+  Become:
+  shell: |
+    curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+    sudo apt-get install -y nodejs
+    sudo npm install --global n
+    sudo n 13.8.0
 
 - name: "Install PM2 Globally"
-    npm:
-      name: pm2
-      global: true
+  npm:
+    name: pm2
+    global: true
