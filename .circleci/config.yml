@@ -72,7 +72,7 @@ jobs:
           name: Build front-end
           command: |
             cd frontend
-            npm install
+            npm install -f
             npm run build
             npm audit fix
       - save_cache:
@@ -90,7 +90,7 @@ jobs:
           name: Back-end build
           command: |
             cd backend
-            npm install
+            npm install -f
             npm run build
             npm audit fix
       - save_cache:
