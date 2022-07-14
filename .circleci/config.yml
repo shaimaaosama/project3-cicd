@@ -203,26 +203,21 @@ jobs:
 
   configure-infrastructure:
     docker:
-      # Docker image here that supports Ansible
       - image: cimg/base:stable
     steps:
       - checkout
-      # Add ssh keys with fingerprint
+      - install_ansible
       - add_ssh_keys:
-          fingerprints:
-            - "8c:28:c2:6b:45:52:2c:0f:99:e7:14:56:30:5a:14:43"
-      # attach workspace
-      - run:
-          name: Install dependencies
-          command: |
-            # Your code here
-            exit 1
+          fingerprints: ["8c:28:c2:6b:45:52:2c:0f:99:e7:14:56:30:5a:14:43"]
+      - attach_workspace: 
+          at: ~/
       - run:
           name: Configure server
           command: |
-            # Your code here
-            exit 1
-      # Here's where you will add some code to rollback on failure      
+            cd .circleci/ansible
+            cat inventory.txt
+            ansible-playbook -i inventory.txt configure-server.yml
+      - destroy-environment    
 
 #   run-migrations:
 #     docker:
@@ -355,8 +350,8 @@ workflows:
           filters:
             branches:
               only: [master]
-      # - configure-infrastructure:
-      #     requires: [deploy-infrastructure]
+      - configure-infrastructure:
+          requires: [deploy-infrastructure]
       # - run-migrations:
       #     requires: [configure-infrastructure]
       # - deploy-frontend:
