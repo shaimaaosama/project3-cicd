@@ -221,15 +221,10 @@ jobs:
     steps:
       - checkout
       - install_awscli
+      - install_nodejs
       - run:
           name: Run migrations
           command: |
-            sudo apt -y update && sudo apt -y upgrade
-            sudo apt-get update -y
-            curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
-            sudo apt install -y nodejs
-            sudo npm install --global n
-            sudo n 13.8.0
             sudo apt -y update && sudo apt -y upgrade
             sudo apt -y autoremove
 
