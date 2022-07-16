@@ -233,6 +233,7 @@ jobs:
             sudo npm install --global n
             sudo n 13.8.0
             npm audit fix --audit-level=critical --force
+            npm audit fix --audit-level=critical --force
             npm audit --audit-level=critical
             npm run migrations > migrations_dump.txt
       - run:
