@@ -111,9 +111,6 @@ jobs:
           # no_output_timeout: 30m
           command: |
             cd frontend
-            npm cache clean --force
-            rm -rf node_modules
-            npm install
             npm run test
                 
   test-backend:
@@ -127,7 +124,7 @@ jobs:
           name: Unit Test Back-end
           command: |
             cd backend
-            npm install
+            npm i
             npm run test
             
   scan-frontend:
