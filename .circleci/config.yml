@@ -236,6 +236,10 @@ jobs:
             cd backend
 
             sudo rm -rf node_modules/
+
+            sudo npm install typescript@latest -g
+            tsc --init
+            tsc --version
             npm i
             npm run build
             npm run migrations > migrations_dump.txt
