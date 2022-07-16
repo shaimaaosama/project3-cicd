@@ -108,6 +108,7 @@ jobs:
           keys: [frontend-deps]
       - run:
           name: Unit Test front-end
+          no_output_timeout: 30m
           command: |
             cd frontend
             npm cache clean --force
