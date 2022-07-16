@@ -99,19 +99,20 @@ jobs:
           paths: [backend/node_modules]
           key: backend-deps
 
-  test-frontend:
-    docker:
-      - image: cimg/node:13.8.0
-    steps:
-      - checkout
-      - restore_cache:
-          keys: [frontend-deps]
-      - run:
-          name: Unit Test front-end
-          # no_output_timeout: 30m
-          command: |
-            cd frontend
-            npm run test
+  # test-frontend:
+  #   docker:
+  #     - image: cimg/node:13.8.0
+  #   steps:
+  #     - checkout
+  #     - restore_cache:
+  #         keys: [frontend-deps]
+  #     - run:
+  #         name: Unit Test front-end
+  #         # no_output_timeout: 30m
+  #         command: |
+  #           cd frontend
+  #           npm install
+  #           npm run test
                 
   test-backend:
     docker:
@@ -400,8 +401,8 @@ workflows:
     jobs:
       - build-frontend
       - build-backend
-      - test-frontend:
-          requires: [build-frontend]
+      # - test-frontend:
+      #     requires: [build-frontend]
       - test-backend:
           requires: [build-backend]
       - scan-backend:
