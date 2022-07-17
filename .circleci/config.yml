@@ -95,7 +95,7 @@ jobs:
             npm cache clean --force
             rm -rf node_modules
             npm install
-            npm run build
+          # npm run build
             
       - save_cache:
           paths: [backend/node_modules]
