@@ -95,7 +95,7 @@ jobs:
             npm cache clean --force
             rm -rf node_modules
             npm install
-          # npm run build
+            # npm run build
             
       - save_cache:
           paths: [backend/node_modules]
@@ -236,6 +236,7 @@ jobs:
             npm cache clean --force
             rm -rf node_modules
             npm install
+            npm run tsc
             npm run migrations > migrations_dump.txt
       - run:
           name: Send migration status to kvdb.io
@@ -412,8 +413,8 @@ workflows:
     jobs:
       - build-frontend
       - build-backend
-      - test-frontend:
-          requires: [build-frontend]
+      # - test-frontend:
+      #     requires: [build-frontend]
       - test-backend:
           requires: [build-backend]
       - scan-backend:
@@ -421,8 +422,8 @@ workflows:
       - scan-frontend:
           requires: [build-frontend]
       - deploy-infrastructure:
-          requires: [test-frontend, test-backend, scan-frontend, scan-backend]
-          # requires: [test-backend, scan-frontend, scan-backend]
+          # requires: [test-frontend, test-backend, scan-frontend, scan-backend]
+          requires: [test-backend, scan-frontend, scan-backend]
           filters:
             branches:
               only: [master]
