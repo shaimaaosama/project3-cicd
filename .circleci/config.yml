@@ -73,10 +73,9 @@ jobs:
           name: Build front-end
           command: |
             cd frontend
-            npm cache clean --force
-            rm -rf node_modules
             npm install
-            
+          # npm cache clean --force
+          # rm -rf node_modules        
       - save_cache:
           paths: [frontend/node_modules]
           key: frontend-deps
@@ -92,10 +91,10 @@ jobs:
           name: Back-end build
           command: |
             cd backend
-            npm cache clean --force
-            rm -rf node_modules
             npm install
-            # npm run build
+# npm run build
+# npm cache clean --force
+# rm -rf node_modules
             
       - save_cache:
           paths: [backend/node_modules]
