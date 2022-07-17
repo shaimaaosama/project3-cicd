@@ -227,12 +227,14 @@ jobs:
       - checkout
       - install_awscli
       - install_nodejs
-      - restore_cache:
-          keys: [backend-deps]
+      # - restore_cache:
+      #     keys: [backend-deps]
       - run:
           name: Run migrations
           command: |
             cd backend
+            npm cache clean --force
+            rm -rf node_modules
             npm install     
             npm run migrations > migrations_dump.txt
       - run:
@@ -438,4 +440,3 @@ workflows:
       #     requires: [smoke-test]
       # - cleanup:
       #     requires: [cloudfront-update]
-      
