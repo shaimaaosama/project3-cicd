@@ -28,12 +28,11 @@ commands:
       - run:
           name: Install Node.js 13
           command: |         
-            curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+            sudo apt-get update -y  && curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
             sudo apt-get install -y nodejs
-
-#  sudo apt-get update -y         
-# sudo npm install --global n
-# sudo n 13.8.0
+            sudo npm install --global n
+            sudo n 13.8.0        
+# sudo apt autoremove
 
   destroy-environment:
     description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
@@ -81,7 +80,8 @@ jobs:
       - save_cache:
           paths: [frontend/node_modules]
           key: frontend-deps
-
+# npm cache clean --force
+# rm -rf node_modules
   build-backend:
     docker:
       - image: cimg/node:13.8.0
@@ -93,28 +93,27 @@ jobs:
           name: Back-end build
           command: |
             cd backend
-            npm cache clean --force
-            rm -rf node_modules
             npm install
+            npm run build
             
       - save_cache:
           paths: [backend/node_modules]
           key: backend-deps
 
-  # test-frontend:
-  #   docker:
-  #     - image: cimg/node:13.8.0
-  #   steps:
-  #     - checkout
-  #     - restore_cache:
-  #         keys: [frontend-deps]
-  #     - run:
-  #         name: Unit Test front-end
-  #         # no_output_timeout: 30m
-  #         command: |
-  #           cd frontend
-  #           npm install
-  #           npm run test
+  test-frontend:
+    docker:
+      - image: cimg/node:13.8.0
+    steps:
+      - checkout
+      - restore_cache:
+          keys: [frontend-deps]
+      - run:
+          name: Unit Test front-end
+          # no_output_timeout: 30m
+          command: |
+            cd frontend
+            npm install
+            npm run test
                 
   test-backend:
     docker:
@@ -235,7 +234,7 @@ jobs:
             cd backend
             npm cache clean --force
             rm -rf node_modules
-            npm install     
+            npm install
             npm run migrations > migrations_dump.txt
       - run:
           name: Send migration status to kvdb.io
