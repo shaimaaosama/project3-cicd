@@ -114,7 +114,8 @@ jobs:
           command: |
             cd frontend
             npm install
-            npm test
+            npm build
+            npm run test
            
   test-backend:
     docker:
@@ -310,6 +311,7 @@ jobs:
 
             cd ..
             cp backend/artifact.tar.gz .circleci/ansible/roles/deploy/files
+      # ls -lts .circleci/ansible/roles/deploy/files
       - run:
           name: Deploy backend
           command: |
