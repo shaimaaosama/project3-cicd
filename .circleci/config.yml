@@ -52,14 +52,23 @@ commands:
           name: Revert migrations
           when: on_fail
           command: |
-            SUCCESS=$(curl --insecure https://kvdb.io/${KVDB_BUCKET}/migration_${CIRCLE_WORKFLOW_ID:0:7})
+            # Curl command here to see if there was a successful migration associated with the workflow id, store result in SUCCESS variable
             SUCCESS = 1
             if(( $SUCCESS==1 )); 
             then
-              cd ~/project/backend
-              npm install
-              npm run migrations:revert
+            #  cd ~/project/backend
+            #  npm install
+            #  Add revert code here. You can find this in the Getting Started section.
+              exit 1
             fi
+          # SUCCESS=$(curl --insecure https://kvdb.io/${KVDB_BUCKET}/migration_${CIRCLE_WORKFLOW_ID:0:7})
+          # SUCCESS = 1
+          # if(( $SUCCESS==1 )); 
+          # then
+          #   cd ~/project/backend
+          #   npm install
+          #   npm run migrations:revert
+          # fi
             
 jobs:
   build-frontend:
