@@ -30,8 +30,8 @@ commands:
           command: |         
             sudo apt-get update -y  && curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
             sudo apt-get install -y nodejs
-            sudo npm install --global n
-            sudo n 13.8.0        
+          # sudo npm install --global n
+          # sudo n 13.8.0        
 # sudo apt autoremove
 
   destroy-environment:
@@ -229,14 +229,13 @@ jobs:
       - checkout
       - install_awscli
       - install_nodejs
-      # - restore_cache:
-      #     keys: [backend-deps]
+      - restore_cache:
+          keys: [backend-build]
       - run:
           name: Run migrations
           command: |
             cd backend
             npm install
-            npm run migrations:revert
             npm run migrations > migrations_dump.txt
       - run:
           name: Send migration status to kvdb.io
@@ -246,7 +245,9 @@ jobs:
               curl https://kvdb.io/${KVDB_BUCKET}/migration_${CIRCLE_WORKFLOW_ID:0:7} -d '1'
             fi
       - destroy-environment
-      # - revert-migrations
+      - revert-migrations
+
+# npm run migrations:revert
 #  npm cache clean --force
 # rm -rf node_modules 
 # npm run tsc 
