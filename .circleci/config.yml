@@ -92,7 +92,7 @@ jobs:
           command: |
             cd backend
             npm install
-            
+
 # npm run build
 # npm cache clean --force
 # rm -rf node_modules
@@ -235,10 +235,7 @@ jobs:
           name: Run migrations
           command: |
             cd backend
-            npm cache clean --force
-            rm -rf node_modules
             npm install
-            npm run tsc
             npm run migrations > migrations_dump.txt
       - run:
           name: Send migration status to kvdb.io
@@ -249,7 +246,9 @@ jobs:
             fi
       - destroy-environment
       # - revert-migrations
-      
+#  npm cache clean --force
+# rm -rf node_modules 
+# npm run tsc 
 
   deploy-frontend:
     docker:
