@@ -215,6 +215,7 @@ jobs:
             cat inventory.txt
             ansible-playbook -i inventory.txt configure-server.yml
       - destroy-environment    
+
 # sudo npm install typescript@latest -g
 #             tsc --init
 #             tsc --version
