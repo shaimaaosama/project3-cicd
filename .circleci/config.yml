@@ -255,7 +255,6 @@ jobs:
             fi
       - destroy-environment
       # - revert-migrations
-
 # npm run migrations:revert
 #  npm cache clean --force
 # rm -rf node_modules 
