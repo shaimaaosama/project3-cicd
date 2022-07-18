@@ -231,6 +231,7 @@ jobs:
 #             tsc --version
 #             npm i
 #             npm run build
+
   run-migrations:
     docker:
       - image: cimg/node:13.8.0
