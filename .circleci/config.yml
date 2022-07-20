@@ -407,8 +407,7 @@ jobs:
             echo Stack names: "${STACKS[@]}"   
             export OldWorkflowID=$(curl --insecure https://kvdb.io/${KVDB_BUCKET}/old_workflow_id)
             # export STACKS=[] #put the list of stacks here
-            echo Old Workflow ID: $OldWorkflowID
-            cat $OldWorkflowID
+            echo Old Workflow ID: $OldWorkflowID    
       - run:
           name: Remove old stacks and files
           command: |
@@ -418,6 +417,7 @@ jobs:
               aws cloudformation delete-stack --stack-name "udapeople-backend-${OldWorkflowID}"
               aws cloudformation delete-stack --stack-name "udapeople-frontend-${OldWorkflowID}"
             fi
+# cat $OldWorkflowID
 # cat udapeople-${OldWorkflowID}
 
 workflows:
