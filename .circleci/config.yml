@@ -30,7 +30,7 @@ commands:
           command: |         
             sudo apt-get update -y  && curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
             sudo apt-get install -y nodejs
-            sudo npm install --global n
+            sudo npm install --location=global n
             sudo n 13.8.0    
 
           # npm install -g npm    
@@ -62,9 +62,9 @@ commands:
             SUCCESS=$(curl --insecure https://kvdb.io/${KVDB_BUCKET}/migration_<< parameters.Workflow_ID >>)
             if(( $SUCCESS==1 )); 
             then
-             cd ~/project/backend
-             npm install
-             npm run migration:revert
+              cd ~/project/backend
+              npm install
+              npm run migration:revert
             fi
             
 jobs:
@@ -211,6 +211,7 @@ jobs:
     steps:
       - checkout
       - install_ansible
+      - install_awscli
       - add_ssh_keys:
           fingerprints: ["8c:28:c2:6b:45:52:2c:0f:99:e7:14:56:30:5a:14:43"]
       - attach_workspace: 
