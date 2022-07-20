@@ -30,7 +30,7 @@ commands:
           command: |         
             sudo apt-get update -y  && curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
             sudo apt-get install -y nodejs
-            sudo npm install --location=global n
+            sudo npm install --global n
             sudo n 13.8.0    
 
           # npm install -g npm    
