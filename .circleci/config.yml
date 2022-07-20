@@ -30,9 +30,11 @@ commands:
           command: |         
             sudo apt-get update -y  && curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
             sudo apt-get install -y nodejs
-          # sudo npm install --global n
-          # sudo n 13.8.0        
-# sudo apt autoremove
+            sudo npm install --global n
+            sudo n 13.8.0    
+
+          # npm install -g npm    
+          # sudo apt autoremove
 
   destroy-environment:
     description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
@@ -41,9 +43,10 @@ commands:
           name: Destroy environments
           when: on_fail
           command: |
-            aws s3 rm "s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7}" --recursive
             aws cloudformation delete-stack --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}"
+            aws s3 rm "s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7}" --recursive
             aws cloudformation delete-stack --stack-name "udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}"
+# fixme shaimaa revesion delete backend after re  s3
 
   revert-migrations:
     description: Revert the last migration if successfully run in the current workflow.
