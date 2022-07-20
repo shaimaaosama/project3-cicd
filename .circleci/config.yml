@@ -304,6 +304,8 @@ jobs:
           fingerprints: ["8c:28:c2:6b:45:52:2c:0f:99:e7:14:56:30:5a:14:43"]
       - attach_workspace:
           at: ~/
+      - restore_cache:
+          keys: [backend-deps]
       - run:
           name: Install dependencies
           command: |
@@ -321,9 +323,9 @@ jobs:
       - run:
           name: Deploy backend
           command: |
-            export TYPEORM_MIGRATIONS_DIR=./dist/migrations
-            export TYPEORM_ENTITIES=./dist/modules/domain/**/*.entity{.ts,.js}
-            export TYPEORM_MIGRATIONS=./dist/migrations/*.ts
+            export TYPEORM_MIGRATIONS_DIR=./migrations
+            export TYPEORM_ENTITIES=./modules/domain/**/*.entity{.ts,.js}
+            export TYPEORM_MIGRATIONS=./migrations/*.ts
 
             cd .circleci/ansible
             cat inventory.txt
