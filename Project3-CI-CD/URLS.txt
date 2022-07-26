@@ -1,0 +1,14 @@
+
+Project3 URLs:
+
+URL01: https://github.com/shaimaaosama/project3-cicd
+
+URL02: http://udapeople-b5087bb.s3.amazonaws.com/index.html
+
+URL03: http://d10yzlvqay7dwb.cloudfront.net/
+
+URL04_1: http://54.147.238.187:3030/api/status
+
+URL04_2: http://ec2-54-147-238-187.compute-1.amazonaws.com:3030/api/status
+
+URL05: http://ec2-54-82-249-114.compute-1.amazonaws.com:9090/
